@@ -1,11 +1,11 @@
 package com.codetest.szs.dto;
 
-import com.codetest.szs.common.ResponseType;
+import com.codetest.szs.common.enums.ResponseType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import static com.codetest.szs.common.ResponseType.SUCCESS;
-import static com.codetest.szs.common.ResponseType.FAILURE;
+import static com.codetest.szs.common.enums.ResponseType.SUCCESS;
+import static com.codetest.szs.common.enums.ResponseType.FAILURE;
 @Getter
 @NoArgsConstructor
 public class Response<T> {

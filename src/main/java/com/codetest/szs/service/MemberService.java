@@ -1,7 +1,7 @@
 package com.codetest.szs.service;
 
 import com.codetest.szs.domain.Member;
-import com.codetest.szs.dto.UserDto;
+import com.codetest.szs.dto.MemberDto;
 import com.codetest.szs.encrypt.EncryptHelper;
 import com.codetest.szs.repository.MemberRepository;
 import com.codetest.szs.repository.TestMemberRepository;
@@ -29,7 +29,7 @@ public class MemberService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
-    public ResponseEntity createMember(UserDto.userSignUpRequest request) {
+    public ResponseEntity createMember(MemberDto.memberSignUpRequest request) {
         if(joinAvailableCheck(request) && !duplicateCheck(request)) {
             request.setPassword(encryptHelper.encrypt(request.getPassword()));
             request.setRegNo(encryptHelper.encrypt(request.getRegNo()));
@@ -41,7 +41,7 @@ public class MemberService {
         return new ResponseEntity(success(), HttpStatus.OK);
     }
 
-    public ResponseEntity login(UserDto.userLoginRequest request) {
+    public ResponseEntity login(MemberDto.memberLoginRequest request) {
         Map<String, String> map = new HashMap<>();
 
         Optional<Member> member = Optional.of(memberRepository.findById(request.getUserId())
@@ -55,14 +55,14 @@ public class MemberService {
         return new ResponseEntity(success(map), HttpStatus.OK);
     }
 
-    private Boolean joinAvailableCheck(UserDto.userSignUpRequest request) {
+    private Boolean joinAvailableCheck(MemberDto.memberSignUpRequest request) {
         return testMemberRepository.findById(request.getName())
                 .filter(member -> member.getName().equals(request.getName()) &&
                         member.getRegNo().equals(request.getRegNo()))
                 .isPresent();
     }
 
-    private Boolean duplicateCheck(UserDto.userSignUpRequest request) {
+    private Boolean duplicateCheck(MemberDto.memberSignUpRequest request) {
         return memberRepository.findById(request.getUserId())
                 .isPresent();
     }

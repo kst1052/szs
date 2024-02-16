@@ -4,19 +4,21 @@ import com.codetest.szs.encrypt.EncryptHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class EncryptHelperTest {
-    @Autowired
-    private final EncryptHelper encryptHelper;
 
+    private final EncryptHelper encryptHelper;
+    @Autowired
     EncryptHelperTest(EncryptHelper encryptHelper) {
         this.encryptHelper = encryptHelper;
     }
 
     @Test
-    public void bcyptTest() {
-        String encTest = encryptHelper.encrypt("1234");
-        System.out.println("encTest :: " + encTest);
+    public void bcryptTest() {
+        String hash = encryptHelper.encrypt("1234");
+
+        assertThat(hash).hasSize(60);
+        assertThat(encryptHelper.isMatch("1234", hash)).isTrue();
     }
 }

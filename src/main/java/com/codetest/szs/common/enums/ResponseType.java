@@ -1,4 +1,4 @@
-package com.codetest.szs.common;
+package com.codetest.szs.common.enums;
 
 public enum ResponseType {
     SUCCESS("200"),

@@ -1,7 +1,6 @@
 package com.codetest.szs.domain;
 
-import com.codetest.szs.dto.UserDto;
-import com.codetest.szs.encrypt.EncryptHelper;
+import com.codetest.szs.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,7 +45,7 @@ public class Member {
         this.incomeInfo = incomeInfo;
     }
 
-    public static Member toEntity(UserDto.userSignUpRequest request) {
+    public static Member toEntity(MemberDto.memberSignUpRequest request) {
         return Member.builder()
                 .UserId(request.getUserId())
                 .password(request.getPassword())

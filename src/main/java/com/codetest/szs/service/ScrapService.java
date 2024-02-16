@@ -70,6 +70,9 @@ public class ScrapService {
 
         Pair<Double, Double> taxInfo = scrapResponse.calculateTax();
 
-        return new ScrapDto.taxResponse(member.get().getName(), Double.toString(taxInfo.getLeft()),Double.toString(taxInfo.getRight()));
+        return new ScrapDto.taxResponse(member.get().getName(), doubleToFormattedString(taxInfo.getLeft()), doubleToFormattedString(taxInfo.getRight()));
+    }
+    private String doubleToFormattedString(Double d) {
+        return String.format("%1$,.0f", d);
     }
 }
